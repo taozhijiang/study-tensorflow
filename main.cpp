@@ -73,6 +73,19 @@ tensorflow::Session* PrepareSession(const std::string& model_file) {
     return session;
 }
 
+void CloseSession(tensorflow::Session* session) {
+    if(session) {
+        auto status = session->Close();
+        if(!status.ok()) {
+            std::cout << "[ERROR] Close Tensorflow session failed." << std::endl;
+        } else {
+            std::cout << "[INFO] Close Tensorflow session successfully." << std::endl;
+        }
+
+        delete session;
+    }
+}
+
 // Tensorflow的计算是延迟加载的，所以为了避免模型在加载后首次预估超时，需要先做预热
 bool WarmUpSession(tensorflow::Session* session, float images[]) {
     if(!session)
@@ -108,7 +121,7 @@ struct prob_result {
 };
 
 struct prob_result MakeResult(const float* predict_out) {
-    
+
     struct prob_result result {};
 
     if(!predict_out)
@@ -184,6 +197,7 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
     }
 
+    CloseSession(session);
 
     std::cout << "[INFO] Tensorflow Inference finished." << std::endl;
     return EXIT_SUCCESS;
