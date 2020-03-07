@@ -16,7 +16,9 @@ LAYER3_NODE_SIZE = 128
 
 INPUT_NODE_NAME  = "x-input"
 OUTPUT_NODE_NAME = "y-output"
+
 # softmax结果的最终预估结果
+# 要导出模型，绝对不能用y-ouput，否则模型导不出来
 FINAL_OUTPUT_NODE_NAME = "final-output"
 KEEP_PROB_NODE_NAME = "keep-prob"
 
