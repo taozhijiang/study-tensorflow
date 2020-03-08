@@ -38,3 +38,9 @@ target_link_libraries(
     start_tf_add
     ${EXTRA_LIBS}
 )
+
+add_executable(start_tf_tensor tensor.cc)
+target_link_libraries(
+    start_tf_tensor
+    ${EXTRA_LIBS}
+)
