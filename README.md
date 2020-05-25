@@ -1,1 +1,1 @@
-A simple example using tensorflow for mnist case.
+A simple example using tensorflow from scratch.
