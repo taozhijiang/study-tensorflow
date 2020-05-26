@@ -1,0 +1,165 @@
+node {
+  name: "x-input1"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "x-input2"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "weight-n"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 10
+      }
+    }
+  }
+}
+node {
+  name: "weight-n/read"
+  op: "Identity"
+  input: "weight-n"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@weight-n"
+      }
+    }
+  }
+}
+node {
+  name: "bias-n"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 100
+      }
+    }
+  }
+}
+node {
+  name: "bias-n/read"
+  op: "Identity"
+  input: "bias-n"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@weight-n"
+      }
+    }
+  }
+}
+node {
+  name: "Add"
+  op: "Add"
+  input: "x-input1"
+  input: "x-input2"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Mul"
+  op: "Mul"
+  input: "Add"
+  input: "weight-n/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "y-output"
+  op: "Add"
+  input: "Mul"
+  input: "bias-n/read"
+  device: "/device:CPU:0"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+library {
+}

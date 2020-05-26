@@ -177,7 +177,10 @@ bool RunInference(tensorflow::Session* session, const float images_a[], const fl
 
 int main(int argc, char* argv[]) {
 
-    const char* model_file = "../mnist/frozen_model.pb";
+    std::string model_file = "../mnist/frozen_model.pb";
+    if(argc > 1) {
+        model_file = std::string(argv[1]);
+    }
     // std::cout << "size of image_a: " << sizeof(image_a) / sizeof(image_a[0]) << std::endl;
     // std::cout << "size of image_b: " << sizeof(image_b) / sizeof(image_b[0]) << std::endl;
 
