@@ -45,6 +45,7 @@ Tensorflow Serving project, using simplified tensorflow v1.13.z.
 ~ # origin/r1.13-lite
 ~ # change the commitid according to tensorflow origin/r1.13.z-lite
 ~ /opt/bazel-prefix/0.21.0/bin/bazel build --action_env TF_REVISION="4e10db870cbdce3eb703a4ea179643d424327ab5" -c dbg --strip=never --cxxopt=-D_GLIBCXX_USE_CXX11_ABI=0 //tensorflow_serving/model_servers:tensorflow_model_server --workspace_status_command=tools/gen_status_stamp.sh
-~ 
+~ ls -l bazel-bin/tensorflow_serving/model_servers/tensorflow_model_server
+-r-xr-xr-x  1 taozj  wheel  1393543592  5 27 00:02 bazel-bin/tensorflow_serving/model_servers/tensorflow_model_server
 ~
 ```
